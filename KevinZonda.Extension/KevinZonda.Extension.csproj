@@ -4,6 +4,25 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Authors>KevinZonda</Authors>
+    <Company>KevinZonda</Company>
+    <Product>KevinZonda.Extension</Product>
+    <Description>C# Extension Package incl. extension syntax &amp; methods.</Description>
+    <Copyright>Copyright © 2022 KevinZonda</Copyright>
+    <PackageProjectUrl>https://github.com/KevinZonda/KevinZonda.Extension</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/KevinZonda/KevinZonda.Extension</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>logo-128x128.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="assets\logo-128x128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
