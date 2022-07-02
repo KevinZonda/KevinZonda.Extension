@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Linq;
 
+using static KevinZonda.Extension.Syntax.GoLang;
+
 namespace KevinZonda.Extension.Syntax;
 
 public static class CSharp
 {
-    public static (bool IsOk, T? Result, Exception? Ex) TryEx<T>(this Func<T> tryFunc)
+    public static ResultWithErr<T> TryEx<T>(this Func<T> tryFunc)
     {
         try
         {
             var l = tryFunc();
-            return (true, l, null);
+            return new ResultWithErr<T>(l);
         }
         catch (Exception ex)
         {
-            return (false, default(T), ex);
+            return new ResultWithErr<T>(ex);
         }
     }
 

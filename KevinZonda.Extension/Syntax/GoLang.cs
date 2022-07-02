@@ -27,4 +27,45 @@ public class GoLang
         }
 
     }
+
+    public static void Defer<T>(T obj, Action<T> defer, Action<T> oper)
+    {
+        try
+        {
+            oper(obj);
+        }
+        finally
+        {
+            defer(obj);
+        }
+    }
+
+    public static void Defer<T>(T obj, Action<T> defer, Action<T> oper, Action<Exception> recover)
+    {
+        try
+        {
+            oper(obj);
+        }
+        catch(Exception ex)
+        {
+            recover(ex);
+        }
+        finally
+        {
+            defer(obj);
+        }
+    }
+
+    public static Exception? Recover(Action act)
+    {
+        try
+        {
+            act();
+            return null;
+        }
+        catch (Exception ex)
+        {
+            return ex;
+        }
+    }
 }
