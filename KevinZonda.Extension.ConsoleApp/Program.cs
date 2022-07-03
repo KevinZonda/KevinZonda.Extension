@@ -7,7 +7,7 @@ var obj3 = new C(12);
 var d = new MultiTypeObject(obj3, typeof(A), typeof(C), typeof(int));
 Console.WriteLine(d.GetType());
 Console.WriteLine(d.GetValue<C>());
-d.SetValue(obj2, true, false);
+d.SetValueT(obj2, true, false);
 Console.WriteLine(d.GetType());
 var a = d.GetValue<A>();
 Console.WriteLine(a.X);

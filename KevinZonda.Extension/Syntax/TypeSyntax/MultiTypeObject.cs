@@ -34,6 +34,15 @@ public class MultiTypeObject
         return _currentType;
     }
 
+    public bool SetValueT<T>(T v, bool autoFallBack = true, bool throwExIfFailed = true)
+    {
+        bool rst = SetValueBool(v, autoFallBack);
+        if (!rst && throwExIfFailed)
+            throw new InvalidOperationException("Not Valid Type");
+        return rst;
+    }
+
+
     public bool SetValue(dynamic v, bool autoFallBack = true, bool throwExIfFailed = true)
     {
         bool rst = SetValueBool(v, autoFallBack);
