@@ -34,10 +34,31 @@ public class MultiTypeObject
         return _currentType;
     }
 
-    public bool SetValue(dynamic v)
+    public bool SetValue(dynamic v, bool autoFallBack = true, bool throwExIfFailed = true)
     {
-        var t = v.GetType();
-        if (!_typeList.Contains(t)) return false;
+        bool rst = SetValueBool(v, autoFallBack);
+        if (!rst && throwExIfFailed)
+            throw new InvalidOperationException("Not Valid Type");
+        return rst;
+    }
+
+    private bool SetValueBool(dynamic v, bool autoFallBack = true)
+    {
+        Type t = v.GetType();
+        if (!_typeList.Contains(t))
+        {
+            if (!autoFallBack) return false;
+            foreach (Type _type in _typeList)
+            {
+                if (_type.IsAssignableFrom(t))
+                {
+                    _currentType = _type;
+                    _obj = v;
+                    return true;
+                }
+            }
+            return false;
+        }
         _obj = v;
         _currentType = t;
         return true;
@@ -45,8 +66,6 @@ public class MultiTypeObject
 
     public T GetValue<T>()
     {
-        Console.WriteLine("XXXXXXXXXXXX");
-        Console.WriteLine(_currentType);
         if (_currentType == typeof(T)) return (T)_obj;
         if (_obj is T t) return t;
         if (_currentType.IsSubclassOf(typeof(T))) return (T)_obj;
