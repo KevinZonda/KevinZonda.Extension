@@ -12,4 +12,9 @@ public static class DynamicExt
     {
         return Convert.ChangeType(obj, t);
     }
+
+    public static dynamic ConvertType<T>(dynamic obj)
+    {
+        return ConvertType(obj, typeof(T));
+    }
 }

@@ -17,4 +17,33 @@ public static class ArrayExt
         return arr.Select(s => s.Trim()).ToArray();
     }
 
+    public static T[] Append<T>(T[] x, T[] y)
+    {
+        var z = new T[x.Length + y.Length];
+        x.CopyTo(z, 0);
+        y.CopyTo(z, x.Length);
+        return z;
+    }
+
+    public static T[] Append<T>(T x, T[] y)
+    {
+        var z = new T[1 + y.Length];
+        z[0] = x;
+        y.CopyTo(z, 1);
+        return z;
+    }
+
+    public static T[] Append<T>(T[] x, T y)
+    {
+        var z = new T[x.Length + 1];
+        x.CopyTo(z, 0);
+        z[x.Length] = y;
+        return z;
+    }
+
+    public static T[] Append<T>(T x, T y)
+    {
+        return new[] { x, y };
+    }
+
 }
