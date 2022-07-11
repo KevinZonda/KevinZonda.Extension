@@ -82,4 +82,14 @@ public static class Methods
         }
         return l.ToArray();
     }
+
+    /// <summary>
+    /// Equiv to {a | a <- xs, condition}
+    /// e.g.
+    /// {a | a <- xs, a >= 12} ===  var a = Where(xs, new (a => a >= 12))
+    /// </summary>
+    public static T[] Where<T>(T[] xs, Func<T, bool> condition)
+    {
+        return xs.Where(x => condition(x)).ToArray();
+    }
 }
