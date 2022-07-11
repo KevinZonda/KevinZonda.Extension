@@ -2,6 +2,31 @@
 
 public static class ActionExt
 {
+    public static string GetArgumentTypes<R>(this Action Action)
+    {
+        return $"() -> ()";
+    }
+
+    public static string GetArgumentTypes<T1>(this Action<T1> Action)
+    {
+        return $"{typeof(T1)} -> ()";
+    }
+
+    public static string GetArgumentTypes<T1, T2>(this Action<T1, T2> Action)
+    {
+        return $"{typeof(T1)} -> {typeof(T2)} -> ()";
+    }
+
+    public static string GetArgumentTypes<T1, T2, T3>(this Action<T1, T2, T3> Action)
+    {
+        return $"{typeof(T1)} -> {typeof(T2)} -> {typeof(T3)} -> ()";
+    }
+
+    public static string GetArgumentTypes<T1, T2, T3, T4>(this Action<T1, T2, T3, T4> Action)
+    {
+        return $"{typeof(T1)} -> {typeof(T2)} -> {typeof(T3)} -> {typeof(T4)} -> ()";
+    }
+
     public static Action Apply<T1>(this Action<T1> Action, T1 arg1)
     {
         return new Action(() => Action(arg1));

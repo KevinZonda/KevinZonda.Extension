@@ -2,6 +2,32 @@
 
 public static class FuncExt
 {
+    public static string GetArgumentTypes<R>(this Func<R> func)
+    {
+        return $"() -> {typeof(R)}";
+    }
+
+    public static string GetArgumentTypes<T1, R>(this Func<T1, R> func)
+    {
+        return $"{typeof(T1)} -> {typeof(R)}";
+    }
+
+    public static string GetArgumentTypes<T1, T2, R>(this Func<T1, T2, R> func)
+    {
+        return $"{typeof(T1)} -> {typeof(T2)} -> {typeof(R)}";
+    }
+
+    public static string GetArgumentTypes<T1, T2, T3, R>(this Func<T1, T2, T3, R> func)
+    {
+        return $"{typeof(T1)} -> {typeof(T2)} -> {typeof(T3)} -> {typeof(R)}";
+    }
+
+    public static string GetArgumentTypes<T1, T2, T3, T4, R>(this Func<T1, T2, T3, T4, R> func)
+    {
+        return $"{typeof(T1)} -> {typeof(T2)} -> {typeof(T3)} -> {typeof(T4)} -> {typeof(R)}";
+    }
+
+
     public static Func<R> Apply<T1, R>(this Func<T1, R> func, T1 arg1)
     {
         return new Func<R>(() => func(arg1));
