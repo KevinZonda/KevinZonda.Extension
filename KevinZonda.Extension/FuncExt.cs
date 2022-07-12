@@ -27,7 +27,6 @@ public static class FuncExt
         return $"{typeof(T1)} -> {typeof(T2)} -> {typeof(T3)} -> {typeof(T4)} -> {typeof(R)}";
     }
 
-
     public static Func<R> Apply<T1, R>(this Func<T1, R> func, T1 arg1)
     {
         return new Func<R>(() => func(arg1));
