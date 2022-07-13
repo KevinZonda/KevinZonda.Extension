@@ -61,7 +61,8 @@ public static class Methods
         {
             T[] t = DynamicExt.ConvertType(x);
             l.AddRange(t);
-        }        else
+        }
+        else
         {
             throw new ArrayTypeMismatchException($"Expected {typeT}, get {typeX}");
         }
@@ -91,5 +92,29 @@ public static class Methods
     public static T[] Where<T>(T[] xs, Func<T, bool> condition)
     {
         return xs.Where(x => condition(x)).ToArray();
+    }
+
+    public static void PutStrLn(object obj)
+    {
+        Console.WriteLine(obj);
+    }
+
+    public static void PutStr(object obj)
+    {
+        Console.Write(obj);
+    }
+
+    public static void IfThenElse(Func<bool> condition, Action ifThen, Action ifElse)
+    {
+        if (condition())
+            ifThen();
+        else
+            ifElse();
+    }
+
+    public static void IfThen(Func<bool> condition, Action ifThen)
+    {
+        if (condition())
+            ifThen();
     }
 }
