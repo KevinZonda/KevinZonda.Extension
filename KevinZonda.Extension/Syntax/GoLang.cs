@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace KevinZonda.Extension.Syntax;
 public class GoLang
@@ -67,5 +68,45 @@ public class GoLang
         {
             return ex;
         }
+    }
+
+    public static void Panic(string s)
+    {
+        throw new Exception(s);
+    }
+
+    public static string String(byte[] b)
+    {
+        return Encoding.UTF8.GetString(b);
+    }
+
+    public static string String(Rune[] b)
+    {
+        var sb = new StringBuilder();
+        foreach (var r in b)
+        {
+            sb.Append(r);
+        }
+        return sb.ToString();
+    }
+
+    public static int Atoi(string s)
+    {
+        return int.Parse(s);
+    }
+
+    public static string Itoa(int i)
+    {
+        return i.ToString();
+    }
+
+    public static bool HasPrefix(string s, string prefix)
+    {
+        return s.StartsWith(prefix);
+    }
+
+    public static bool HasSuffix(string s, string suffix)
+    {
+        return s.EndsWith(suffix);
     }
 }

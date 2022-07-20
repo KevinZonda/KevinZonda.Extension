@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace KevinZonda.Extension;
 public static class ArrayExt
@@ -64,4 +65,8 @@ public static class ArrayExt
         return new[] { x, y };
     }
 
+    public static string ToUtf8String(this byte[] b)
+    {
+        return Encoding.UTF8.GetString(b);
+    }
 }
