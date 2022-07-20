@@ -24,6 +24,14 @@ public class MultiTypeObject
             throw new InvalidOperationException("Not supported type");
     }
 
+    public MultiTypeObject(params Type[] types)
+    {
+        _currentType = types[0];
+        _typeList = types.ToList();
+        if (!IsSupportedType(_currentType))
+            throw new InvalidOperationException("Not supported type");
+    }
+
     public bool IsSupportedType(Type t)
     {
         return _typeList.Contains(t);
