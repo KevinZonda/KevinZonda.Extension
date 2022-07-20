@@ -1,4 +1,6 @@
-﻿namespace KevinZonda.Extension.Syntax.TypeSyntax;
+﻿using System;
+
+namespace KevinZonda.Extension.Syntax.TypeSyntax;
 
 public class MultiTypeObject
 {

@@ -3,25 +3,25 @@ using System.Linq;
 
 namespace KevinZonda.Extension.Syntax.TypeSyntax;
 
-internal class MultiTypeObject<T1, T2, T3, T4> : MultiTypeObject
+public class MultiTypeObject<T1, T2, T3, T4> : MultiTypeObject
 {
     public MultiTypeObject() : base(typeof(T1), typeof(T2), typeof(T3), typeof(T4))
     {
     }
 
-    public MultiTypeObject(T1 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T3))
+    public MultiTypeObject(T1 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T4))
     {
     }
 
-    public MultiTypeObject(T2 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T3))
+    public MultiTypeObject(T2 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T4))
     {
     }
 
-    public MultiTypeObject(T3 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T3))
+    public MultiTypeObject(T3 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T4))
     {
     }
 
-    public MultiTypeObject(T4 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T3))
+    public MultiTypeObject(T4 t) : base(t, typeof(T1), typeof(T2), typeof(T3), typeof(T4))
     {
     }
 

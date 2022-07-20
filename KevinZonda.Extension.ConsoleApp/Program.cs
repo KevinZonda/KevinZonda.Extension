@@ -4,9 +4,10 @@ var obj1 = new A();
 var obj2 = new B();
 var obj3 = new C(12);
 
-var d = new MultiTypeObject(obj3, typeof(A), typeof(C), typeof(int));
+var d = new MultiTypeObject<A, B, C, int>(obj3);
 Console.WriteLine(d.GetType());
 Console.WriteLine(d.GetValue<C>());
+Console.WriteLine((C)d);
 d.SetValueT(obj2, true, false);
 Console.WriteLine(d.GetType());
 var a = d.GetValue<A>();

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace KevinZonda.Extension.Syntax.TypeSyntax;
 
-internal class MultiTypeObject<T1, T2> : MultiTypeObject
+public class MultiTypeObject<T1, T2> : MultiTypeObject
 {
     public MultiTypeObject() : base(typeof(T1), typeof(T2))
     {
