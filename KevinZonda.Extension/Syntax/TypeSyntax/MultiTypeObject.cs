@@ -4,15 +4,17 @@ namespace KevinZonda.Extension.Syntax.TypeSyntax;
 
 public class MultiTypeObject
 {
-    private dynamic _obj;
-    private List<Type> _typeList;
-    private Type _currentType;
+    private dynamic? _obj;
+    private Type[] _typeList;
+    private Type? _currentType;
+
+    public bool IsNull => _obj == null;
 
     public MultiTypeObject(dynamic obj, List<Type> typeList)
     {
         this._obj = obj;
         _currentType = obj.GetType();
-        _typeList = typeList;
+        _typeList = typeList.ToArray();
         if (!IsSupportedType(_currentType))
             throw new InvalidOperationException("Not supported type");
     }
@@ -21,17 +23,14 @@ public class MultiTypeObject
     {
         this._obj = obj;
         _currentType = obj.GetType();
-        _typeList = types.ToList();
+        _typeList = types;
         if (!IsSupportedType(_currentType))
             throw new InvalidOperationException("Not supported type");
     }
 
     public MultiTypeObject(params Type[] types)
     {
-        _currentType = types[0];
-        _typeList = types.ToList();
-        if (!IsSupportedType(_currentType))
-            throw new InvalidOperationException("Not supported type");
+        _typeList = types;
     }
 
     public bool IsSupportedType(Type t)
@@ -39,7 +38,7 @@ public class MultiTypeObject
         return _typeList.Contains(t);
     }
 
-    public new Type GetType()
+    public new Type? GetType()
     {
         return _currentType;
     }
@@ -83,39 +82,22 @@ public class MultiTypeObject
         return true;
     }
 
-    public T GetValue<T>()
-    {
-        if (_currentType == typeof(T)) return (T)_obj;
-        if (_obj is T t) return t;
-        if (_currentType.IsSubclassOf(typeof(T))) return (T)_obj;
-
-        return DynamicExt.ConvertType(_obj, typeof(T));
-        //throw new InvalidOperationException("Not supported type");
-    }
+    public T GetValue<T>() => (T)GetValue(typeof(T));
 
     public object GetValue(Type t)
     {
-        if (_currentType == t) return (object)_obj;
-        if (_currentType.IsSubclassOf(t)) return (object)_obj;
+        if (IsNull) throw new NullReferenceException();
+        if (_currentType == t) return _obj!;
+        if (_currentType!.IsSubclassOf(t)) return _obj!;
         return DynamicExt.ConvertType(_obj, t);
     }
 
     public bool IsType(Type t)
     {
-        if (_currentType == t)
-        {
-            return true;
-        }
-        return _currentType.IsSubclassOf(t);
+        if (IsNull) return false;
+        if (_currentType == t) return true;
+        return _currentType!.IsSubclassOf(t);
     }
 
-    public bool IsType<T>()
-    {
-        var t = typeof(T);
-        if (_currentType == t)
-        {
-            return true;
-        }
-        return _currentType.IsSubclassOf(t);
-    }
+    public bool IsType<T>() => IsType(typeof(T));
 }
