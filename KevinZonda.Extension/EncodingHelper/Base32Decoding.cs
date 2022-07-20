@@ -51,16 +51,8 @@ public class Base32Decoding
 
     private static char ValueToChar(byte b)
     {
-        if (b < 26)
-        {
-            return (char)(b + 65);
-        }
-
-        if (b < 32)
-        {
-            return (char)(b + 24);
-        }
-
+        if (b < 26) return (char)(b + 65);
+        if (b < 32) return (char)(b + 24);
         throw new ArgumentException("Byte is not a value Base32 value.", "b");
     }
 }

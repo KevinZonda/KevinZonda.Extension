@@ -55,20 +55,12 @@ public class Base32Encoding
         int value = (int)c;
 
         //65-90 == uppercase letters
-        if (value < 91 && value > 64)
-        {
-            return value - 65;
-        }
+        if (value < 91 && value > 64) return value - 65;
         //50-55 == numbers 2-7
-        if (value < 56 && value > 49)
-        {
-            return value - 24;
-        }
+        if (value < 56 && value > 49) return value - 24;
+
         //97-122 == lowercase letters
-        if (value < 123 && value > 96)
-        {
-            return value - 97;
-        }
+        if (value < 123 && value > 96) return value - 97;
 
         throw new ArgumentException("Character is not a Base32 character.", "c");
     }
