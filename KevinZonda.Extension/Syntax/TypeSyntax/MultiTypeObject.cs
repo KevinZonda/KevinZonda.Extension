@@ -92,6 +92,14 @@ public class MultiTypeObject
         return DynamicExt.ConvertType(_obj, t);
     }
 
+    public bool TryGetValue<T>(ref T v)
+    {
+        if (IsNull) return false;
+        if (!IsType<T>()) return false;
+        v = (T)_obj!;
+        return true;
+    }
+
     public bool IsType(Type t)
     {
         if (IsNull) return false;
