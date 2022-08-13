@@ -2,7 +2,7 @@
 
 public class DFAState<T> : INextStatable<T> where T : notnull
 {
-    public T? Value { get; }
+    public string Label { get; }
     public virtual DFAStateType Type => DFAStateType.Normal;
 
     public bool IsSuccess => Type == DFAStateType.Success;
@@ -22,9 +22,9 @@ public class DFAState<T> : INextStatable<T> where T : notnull
         return _failedState;
     }
 
-    public DFAState(T? value = default, Dictionary<T, DFAState<T>>? states = null)
+    public DFAState(string label = "", Dictionary<T, DFAState<T>>? states = null)
     {
-        Value = value;
+        Label = label;
         Transitions = states;
     }
 }
