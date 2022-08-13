@@ -3,7 +3,7 @@
 
 public class DFAFailedState<T> : DFAState<T> where T : notnull
 {
-    public DFAFailedState(T value, Dictionary<T, DFAState<T>>? states = null)
+    public DFAFailedState(T? value = default, Dictionary<T, DFAState<T>>? states = null)
         : base(value, states)
     {
     }
@@ -19,7 +19,7 @@ public class DFAFailedState<T> : DFAState<T> where T : notnull
 
 public class DFASuccessState<T> : DFAState<T> where T : notnull
 {
-    public DFASuccessState(T value, Dictionary<T, DFAState<T>>? states = null)
+    public DFASuccessState(T? value = default, Dictionary<T, DFAState<T>>? states = null)
         : base(value, states)
     {
     }

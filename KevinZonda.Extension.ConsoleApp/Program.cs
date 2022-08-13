@@ -8,10 +8,10 @@ using KevinZonda.Extension.DataStructure.DFA;
 // 1 -.    -> 2
 // 2 -\d   -> 3
 // 3 -\d   -> 3
-var n0 = new DFAState<char>('0');
-var n1 = new DFAState<char>('1');
-var n2 = new DFAState<char>('2');
-var n3 = new DFASuccessState<char>('2');
+var n0 = new DFAState<char>();
+var n1 = new DFAState<char>();
+var n2 = new DFAState<char>();
+var n3 = new DFASuccessState<char>();
 n0.Transitions = autoMathTable(n1);
 n0.Transitions['+'] = n1;
 n0.Transitions['-'] = n1;
