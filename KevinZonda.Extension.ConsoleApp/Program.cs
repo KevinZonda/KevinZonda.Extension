@@ -1,20 +1,48 @@
 ﻿using KevinZonda.Extension.Syntax.TypeSyntax;
 using KevinZonda.Extension.DataStructure.DFA;
 
-var n = new DFAState<int>(1);
-var n2 = new DFAState<int>(2);
-var n3 = new DFAState<int>(3);
-var n4 = new DFAFailedState<int>(4);
-var n5 = new DFASuccessState<int>(5);
+// double machine
+// 0 -(+|-)-> 1
+// 0 -\d   -> 1
+// 1 -\d   -> 1
+// 1 -.    -> 2
+// 2 -\d   -> 3
+// 3 -\d   -> 3
+var n0 = new DFAState<char>('0');
+var n1 = new DFAState<char>('1');
+var n2 = new DFAState<char>('2');
+var n3 = new DFASuccessState<char>('2');
+n0.Transitions = autoMathTable(n1);
+n0.Transitions['+'] = n1;
+n0.Transitions['-'] = n1;
+n1.Transitions = autoMathTable(n1);
+n1.Transitions['.'] = n2;
+n2.Transitions = n3.Transitions = autoMathTable(n3);
 
-n.Transitions = new()
+
+Dictionary<T, DFAState<T>> autoTransTable<T>(DFAState<T> target, params T[] p)
 {
-    {1, n2 },
-    {4, n5 }
-};
-var dfa = new DFAInstance<int>(n);
+    var d = new Dictionary<T, DFAState<T>>();
+    foreach (var  t in p)
+    {
+        d[t] = target;
+    }
+    return d;
+}
 
-Console.WriteLine(dfa.Matches(new[] { 4, 2, 7, 1 }));
+Dictionary<char, DFAState<char>> autoMathTable(DFAState<char> target)
+{
+    return autoTransTable(target, '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+}
+
+var dfa = new DFAInstance<char>(n0);
+
+Console.WriteLine(dfa.Matches("+1.1".ToCharArray()));
+Console.WriteLine(dfa.Matches("1.1".ToCharArray()));
+Console.WriteLine(dfa.Matches("x.1".ToCharArray()));
+Console.WriteLine(dfa.Matches("-1.1".ToCharArray()));
+Console.WriteLine(dfa.Matches("+1.1x".ToCharArray()));
+
 
 var obj1 = new A();
 var obj2 = new B();

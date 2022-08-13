@@ -26,4 +26,3 @@ public class DFASuccessState<T> : DFAState<T> where T : notnull
 
     public override DFAStateType Type => DFAStateType.Success;
 }
-
