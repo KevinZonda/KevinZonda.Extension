@@ -3,9 +3,12 @@
 
 public class DFAFailedState<T> : DFAState<T> where T : notnull
 {
-    public DFAFailedState(string label = "", Dictionary<T, DFAState<T>>? states = null)
+    public override bool IsGenerated { get; }
+
+    public DFAFailedState(string label = "", Dictionary<T, DFAState<T>>? states = null, bool isGeneratedByDFA = false)
         : base(label, states)
     {
+        IsGenerated = isGeneratedByDFA;
     }
 
     public override DFAState<T> NextState(T value)

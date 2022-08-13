@@ -2,6 +2,8 @@
 
 public class DFAState<T> : INextStatable<T> where T : notnull
 {
+    public virtual bool IsGenerated { get; } = false;
+
     public string Label { get; }
     public virtual DFAStateType Type => DFAStateType.Normal;
 
@@ -18,7 +20,7 @@ public class DFAState<T> : INextStatable<T> where T : notnull
         if (Transitions is not null && Transitions.ContainsKey(value))
             return Transitions[value];
         if (_failedState == null) _failedState =
-                new(default);
+                new(isGeneratedByDFA: true);
         return _failedState;
     }
 
