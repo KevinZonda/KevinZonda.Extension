@@ -1,19 +1,18 @@
 ﻿using KevinZonda.Extension.Syntax.TypeSyntax;
-using KevinZonda.Extension.DataStructure;
+using KevinZonda.Extension.DataStructure.DFA;
 
-
-var n = new DFANormalState<int>(1);
-var n2 = new DFANormalState<int>(2);
-var n3 = new DFANormalState<int>(3);
+var n = new DFAState<int>(1);
+var n2 = new DFAState<int>(2);
+var n3 = new DFAState<int>(3);
 var n4 = new DFAFailedState<int>(4);
 var n5 = new DFASuccessState<int>(5);
 
-n.States = new()
+n.Transitions = new()
 {
     {1, n2 },
     {4, n5 }
 };
-var dfa = new DFA<int>(n);
+var dfa = new DFAInstance<int>(n);
 
 Console.WriteLine(dfa.Matches(new[] { 4, 2, 7, 1 }));
 
